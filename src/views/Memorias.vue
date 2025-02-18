@@ -42,8 +42,7 @@ carregarMemorias();
 
           <!-- Informações da Memória -->
           <h2 class="text-xl font-semibold mt-2">{{ memoria.titulo }}</h2>
-          <p class="text-gray-600">{{ memoria.descricao }}</p>
-          <p class="text-sm text-gray-400">{{ memoria.data }}</p>
+          <p class="text-gray-600 md:h-12">{{ memoria.descricao }}</p>
 
           <!-- Botão para ver mais imagens -->
           <router-link
@@ -52,6 +51,7 @@ carregarMemorias();
           >
             Ver mais imagens →
           </router-link>
+          <p class="text-sm text-gray-400 mt-2">{{ memoria.data }}</p>
         </div>
       </div>
     </div>

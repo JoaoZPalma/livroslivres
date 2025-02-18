@@ -23,36 +23,38 @@ onMounted(carregarMemoria);
 </script>
 
 <template>
-  <div class="min-h-screen border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6">
-    <div v-if="memoria" class=" custom-bg p-6">
-      <h1 class="text-3xl font-bold">{{ memoria.titulo }}</h1>
-      <p class="text-lg">{{ memoria.descricao }}</p>
+  <div>
 
-      <!-- Carrossel de Imagens -->
-      <Swiper
-        :modules="[Navigation, Pagination]"
-        :spaceBetween="10"
-        :slidesPerView="1"
-        :navigation="true"
-        :pagination="true"
-        class="mt-2 max-w-full max-h-[80vh] mx-auto"
-      >
-        <SwiperSlide
-          v-for="(imagem, index) in memoria.imagens"
-          :key="index"
-          class="flex items-center justify-center"
+    <div class="border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6 flex flex-col">
+      <div v-if="memoria" class="custom-bg p-6 flex flex-col">
+        <h1 class="text-3xl font-bold">{{ memoria.titulo }}</h1>
+        <p class="text-lg">{{ memoria.descricao }}</p>
+        <!-- Carrossel de Imagens -->
+        <Swiper
+          :modules="[Navigation, Pagination]"
+          :spaceBetween="10"
+          :slidesPerView="1"
+          :navigation="true"
+          :pagination="true"
+          class="mt-2 max-w-full max-h-[80vh] mx-auto"
         >
-          <img
-          :src="imagem"
-          alt="Imagem da memória"
-          class="w-max h-max object-contain rounded z-30"
-        />
-        </SwiperSlide>
-      </Swiper>
+          <SwiperSlide
+            v-for="(imagem, index) in memoria.imagens"
+            :key="index"
+            class="flex items-center justify-center"
+          >
+            <img
+            :src="imagem"
+            alt="Imagem da memória"
+            class="w-max h-max object-contain rounded z-30"
+          />
+          </SwiperSlide>
+        </Swiper>
 
-      <p class="text-sm text-gray-500">Data: {{ memoria.data }}</p>
+        <p class="text-sm text-gray-500 mt-4">Data: {{ memoria.data }}</p>
+      </div>
+      <p v-else>Carregando memória...</p>
     </div>
-    <p v-else>Carregando memória...</p>
   </div>
 </template>
 

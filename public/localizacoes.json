@@ -1,0 +1,18 @@
+{
+  "eventos": [
+    {
+      "id": 1,
+      "nome": "Evento em Tavira",
+      "lat": 37.1234,
+      "lng": -7.6543,
+      "endereco": "Rua de Sabe Lá Deus, 123, 9999-111 Tavira"
+    },
+    {
+      "id": 2,
+      "nome": "Evento em Lisboa",
+      "lat": 38.7169,
+      "lng": -9.1399,
+      "endereco": "Praça do Comércio, 1100-148 Lisboa"
+    }
+  ]
+}

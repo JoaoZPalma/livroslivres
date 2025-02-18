@@ -1,8 +1,14 @@
 <script setup>
 import { ref } from "vue";
 import  CustomButton  from '@/components/CustomButton.vue';
+import Mapa from '@/components/Mapa.vue';
 
 const activeSection = ref(null);
+const enderecoEvento = ref("");
+
+function handleEnderecoCarregado(endereco){
+  enderecoEvento.value=endereco;
+}
 
 const scrollToSection = (sectionId) => {
   const section = document.getElementById(sectionId);
@@ -51,8 +57,16 @@ const scrollToSection = (sectionId) => {
 
     <!-- Event Section -->
     <div class="bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
-      <h2 class="font-bold text-xl md:text-2xl">Próximo Evento, vem nos ver!</h2>
-      <p class="mt-2">Localização:<br>Rua de Sabe Lá Deus, 123<br>9999-111 Tavira</p>
+      <div class="flex flex-col md:flex-row items-center gap-4 md:gap-12 justify-center">
+        <div class="w-72 h-auto flex-shrink-0">
+          <Mapa :idEvento=1 @endereco-carregado="handleEnderecoCarregado" />
+        </div>
+        <div class="text-center md:text-left">
+          <h2 class="font-bold text-xl md:text-2xl">Próximo Evento, vem nos ver!</h2>
+          <p v-if="enderecoEvento" class="mt-2">Localização:<br> {{ enderecoEvento }}</p>
+        </div>
+
+      </div>
     </div>
 
     <!-- About Section -->
@@ -79,14 +93,14 @@ const scrollToSection = (sectionId) => {
 
     <!-- Footer -->
     <div id="contactos" :class="['bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : '']">        <div class="flex items-center space-x-1">
-        <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor"></path>
-          <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="currentColor"></path>
-          <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="currentColor"></path>
-        </svg>
-        <a href="https://www.instagram.com/pracadoslivroslivres" target="_blank"
+      <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor"></path>
+        <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="currentColor"></path>
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M1.65396 4.27606C1 5.55953 1 7.23969 1 10.6V13.4C1 16.7603 1 18.4405 1.65396 19.7239C2.2292 20.8529 3.14708 21.7708 4.27606 22.346C5.55953 23 7.23969 23 10.6 23H13.4C16.7603 23 18.4405 23 19.7239 22.346C20.8529 21.7708 21.7708 20.8529 22.346 19.7239C23 18.4405 23 16.7603 23 13.4V10.6C23 7.23969 23 5.55953 22.346 4.27606C21.7708 3.14708 20.8529 2.2292 19.7239 1.65396C18.4405 1 16.7603 1 13.4 1H10.6C7.23969 1 5.55953 1 4.27606 1.65396C3.14708 2.2292 2.2292 3.14708 1.65396 4.27606ZM13.4 3H10.6C8.88684 3 7.72225 3.00156 6.82208 3.0751C5.94524 3.14674 5.49684 3.27659 5.18404 3.43597C4.43139 3.81947 3.81947 4.43139 3.43597 5.18404C3.27659 5.49684 3.14674 5.94524 3.0751 6.82208C3.00156 7.72225 3 8.88684 3 10.6V13.4C3 15.1132 3.00156 16.2777 3.0751 17.1779C3.14674 18.0548 3.27659 18.5032 3.43597 18.816C3.81947 19.5686 4.43139 20.1805 5.18404 20.564C5.49684 20.7234 5.94524 20.8533 6.82208 20.9249C7.72225 20.9984 8.88684 21 10.6 21H13.4C15.1132 21 16.2777 20.9984 17.1779 20.9249C18.0548 20.8533 18.5032 20.7234 18.816 20.564C19.5686 20.1805 20.1805 19.5686 20.564 18.816C20.7234 18.5032 20.8533 18.0548 20.9249 17.1779C20.9984 16.2777 21 15.1132 21 13.4V10.6C21 8.88684 20.9984 7.72225 20.9249 6.82208C20.8533 5.94524 20.7234 5.49684 20.564 5.18404C20.1805 4.43139 19.5686 3.81947 18.816 3.43597C18.5032 3.27659 18.0548 3.14674 17.1779 3.0751C16.2777 3.00156 15.1132 3 13.4 3Z" fill="currentColor"></path>
+      </svg>
+      <a href="https://www.instagram.com/pracadoslivroslivres" target="_blank"
         class="text-[#2E2E2E] hover:text-[#D17A22] underline">@pracadoslivroslivres</a>
-      </div>
+    </div>
       <div class="flex items-center space-x-1">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M6.62 10.79a15.91 15.91 0 006.58 6.58l2.2-2.2c.27-.27.66-.36 1.02-.24a10.05 10.05 0 003.16.51c.55 0 1 .45 1 1v3.34c0 .55-.45 1-1 1A19.91 19.91 0 012 4c0-.55.45-1 1-1h3.34c.55 0 1 .45 1 1 0 1.1.17 2.17.51 3.16.12.36.03.75-.24 1.02l-2.2 2.2z"/>
