@@ -23,8 +23,8 @@ onMounted(carregarMemoria);
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#F6EFBD] border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6">
-    <div v-if="memoria" class="p-6">
+  <div class="min-h-screen border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6">
+    <div v-if="memoria" class=" custom-bg p-6">
       <h1 class="text-3xl font-bold">{{ memoria.titulo }}</h1>
       <p class="text-lg">{{ memoria.descricao }}</p>
 
@@ -45,7 +45,7 @@ onMounted(carregarMemoria);
           <img
           :src="imagem"
           alt="Imagem da memória"
-          class="w-max h-max object-contain rounded"
+          class="w-max h-max object-contain rounded z-30"
         />
         </SwiperSlide>
       </Swiper>
@@ -81,4 +81,7 @@ onMounted(carregarMemoria);
   opacity:1;
 }
 
+.custom-bg {
+  background-color: #F6EFBD !important; /* Override the gradient background */
+}
 </style>

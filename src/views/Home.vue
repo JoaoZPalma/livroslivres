@@ -18,8 +18,7 @@ const scrollToSection = (sectionId) => {
 </script>
 
 <template>
-  <div class="min-h-screen bg-[#A2D2DF] text-[#2E2E2E] space-y-6">
-
+  <div>
     <!-- First Section -->
     <div class="bg-[#F6EFBD] p-6 shadow border-t-4 border-b-4 border-[#E9B86C]">
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
