@@ -2,7 +2,7 @@
   <nav class="sticky top-0 left-0 w-full bg-[#A2D2DF] shadow-lg z-50">
     <div class="md:mx-8 px-4 py-4 flex justify-between items-center">
       <!-- Logo or Association Name -->
-      <div class="text-left text-3xl font-medium text-[#2E2E2E]">Associação<br>Praça dos livros livres</div>
+      <div class="text-left text-3xl font-medium text-[#2E2E2E]">Associação<br>Praça dos Livros Livres</div>
 
       <!-- Hamburger Menu for Mobile -->
       <button @click="toggleMenu" class="md:hidden text-[#2E2E2E] focus:outline-none">

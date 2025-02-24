@@ -1,0 +1,10 @@
+{
+  "id": 1,
+  "nome": "Danoninho",
+  "preco": 10.99,
+  "descricao": "Um iogurte saboroso e saudável para os meninos e meninas",
+  "imagens": [
+    "/img/danone.jpg"
+  ],
+  "estado": 1
+}

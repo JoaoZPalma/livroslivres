@@ -1,0 +1,10 @@
+{
+  "id": 2,
+  "nome": "Croquete",
+  "preco": 4.99,
+  "descricao": "Aquela bomba deliciosa",
+  "imagens": [
+    "/img/croquete.jpg"
+  ],
+  "estado": 0
+}
