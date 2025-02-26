@@ -1,10 +1,12 @@
 <script setup>
 import { ref } from "vue";
-import  CustomButton  from '@/components/CustomButton.vue';
+import CustomButton  from '@/components/CustomButton.vue';
+import PrivacyPolicy  from '@/components/PrivacyPolicy.vue';
 import Mapa from '@/components/Mapa.vue';
 
 const activeSection = ref(null);
 const enderecoEvento = ref("");
+const showPrivacyPolicy = ref(false);
 
 function handleEnderecoCarregado(endereco){
   enderecoEvento.value=endereco;
@@ -21,10 +23,21 @@ const scrollToSection = (sectionId) => {
     }, 2000);
   }
 };
+
+function openPrivacyPolicy(){
+  showPrivacyPolicy.value = true;
+  console.log("Ta andar?")
+}
+
+function closePrivacyPolicy(){
+  showPrivacyPolicy.value = false;
+}
+
 </script>
 
 <template>
   <div>
+    <PrivacyPolicy :isOpen="showPrivacyPolicy" @close="closePrivacyPolicy" />
     <!-- First Section -->
     <div class="bg-[#F6EFBD] p-6 shadow border-t-4 border-b-4 border-[#E9B86C]">
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
@@ -91,6 +104,45 @@ const scrollToSection = (sectionId) => {
       </div>
     </div>
 
+<div class="bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+  <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
+    <div class="text-center md:text-left">
+      <h2 class="font-bold text-xl md:text-3xl">Inscreve-te já na nossa Newsletter!</h2>
+      <p class="mt-1">E recebe as mais novas novidades e avisos de futuros eventos!</p>
+          <p class="mt-1 font-light">Sabe mais sobre a nossa
+            <span class="underline cursor-pointer hover:font-normal" @click="openPrivacyPolicy">
+              política de privacidade!
+            </span>
+          </p>
+        </div>
+        <div class="">
+          <form target="_blank" action="https://formsubmit.co/pracadoslivroslivres@gmail.com" method="POST" class="space-y-4">
+            <div class="flex flex-col md:flex-row gap-4">
+              <input type="text" name="nome" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Nome" required>
+              <input type="text" name="apelido" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Apelido" required>
+            </div>
+            <input type="email" name="email" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Endereço de Email" required>
+            <input type="hidden" name="mensagem" value="Inscrição na Newsletter"></input>
+            <div class="flex flex-col md:flex-row gap-y-2 md:gap-y-0 md:gap-x-2 items-center">
+              <CustomButton type="submit">
+                Inscrever-me!
+              </CustomButton>
+              <label class="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  name="consent"
+                  required
+                  oninvalid="this.setCustomValidity('Para prosseguir, preencha a caixa a confirmar que concorda em receber emails com novidades!')"
+                  oninput="this.setCustomValidity('')"
+                >
+                Concordo em receber e-mails com novidades.
+              </label>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+
     <!-- Footer -->
     <div id="contactos" :class="['bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : '']">        <div class="flex items-center space-x-1">
       <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
@@ -131,5 +183,3 @@ const scrollToSection = (sectionId) => {
   </div>
 </template>
 
-<style scoped>
-</style>
