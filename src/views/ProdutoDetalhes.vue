@@ -1,14 +1,15 @@
 <script setup>
 import { ref, onMounted } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination } from 'swiper/modules';
-import  CustomButton  from '@/components/CustomButton.vue';
+import CustomButton from '@/components/CustomButton.vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
 const route = useRoute();
+const router = useRouter();
 const produto = ref(null);
 
 async function carregarProduto() {
@@ -20,13 +21,19 @@ async function carregarProduto() {
   }
 }
 
+function goBack() {
+  router.go(-1); // Navigate back in history
+}
+
 onMounted(carregarProduto);
 </script>
 
 <template>
   <div>
     <div class="mx-2 md:mx-8 border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6 flex flex-col">
-      <div v-if="produto" class="custom-bg p-6 flex flex-col md:flex-row md:space-x-8">
+      <div v-if="produto" :class="
+        {'custom-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 1,
+        'custom-nostock-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 0}">
         <!-- Carrossel de Imagens (à direita no PC) -->
         <div class="md:w-1/2">
           <Swiper
@@ -57,16 +64,11 @@ onMounted(carregarProduto);
           <p class="text-2xl font-semibold mt-2">{{ produto.preco }}€</p>
           <p class="text-sm mt-4">{{ produto.descricao }}</p>
 
-          <!-- Botão com margem adicionada -->
+          <!-- Botão "Voltar" -->
           <div class="mt-4">
-            <CustomButton
-              :class="[
-                'w-full md:w-max md:h-max mt-4',
-                produto.estado === 0 ? 'bg-gray-400 cursor-not-allowed' : ''
-              ]"
-              :disabled="produto.estado === 0"
+            <CustomButton @click="goBack" class='w-full md:w-max md:h-max mt-4'
             >
-              {{ produto.estado === 0 ? 'Fora de Stock' : 'Comprar' }}
+              Voltar
             </CustomButton>
           </div>
         </div>
@@ -111,5 +113,9 @@ onMounted(carregarProduto);
 
 .custom-bg {
   background-color: #F6EFBD !important; /* Fundo do container */
+}
+
+.custom-nostock-bg {
+  background-color: #e5e4dc !important; /* Fundo do container */
 }
 </style>

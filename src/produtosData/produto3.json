@@ -1,0 +1,10 @@
+{
+  "id": 3,
+  "nome": "Café",
+  "preco": 0.99,
+  "descricao": "Para começar bem o dia",
+  "imagens": [
+    "/img/cafe.jpg"
+  ],
+  "estado": 1
+}

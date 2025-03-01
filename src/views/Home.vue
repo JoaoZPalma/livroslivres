@@ -107,7 +107,7 @@ function closePrivacyPolicy(){
 <div class="bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
   <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
     <div class="text-center md:text-left">
-      <h2 class="font-bold text-xl md:text-3xl">Inscreve-te já na nossa Newsletter!</h2>
+      <h2 class="font-bold text-xl md:text-3xl">Increve-te já na nossa Newsletter!</h2>
       <p class="mt-1">E recebe as mais novas novidades e avisos de futuros eventos!</p>
           <p class="mt-1 font-light">Sabe mais sobre a nossa
             <span class="underline cursor-pointer hover:font-normal" @click="openPrivacyPolicy">
@@ -117,12 +117,16 @@ function closePrivacyPolicy(){
         </div>
         <div class="">
           <form target="_blank" action="https://formsubmit.co/pracadoslivroslivres@gmail.com" method="POST" class="space-y-4">
+            <input type="hidden" name="mensagem" value="Inscrição na Newsletter"></input>
+            <!-- <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html"> -->
+            <input type="hidden" name="_subject" value="Nova inscrição na Newsletter!">
+            <input type="hidden" name="_template" value="table">
             <div class="flex flex-col md:flex-row gap-4">
               <input type="text" name="nome" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Nome" required>
               <input type="text" name="apelido" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Apelido" required>
             </div>
             <input type="email" name="email" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Endereço de Email" required>
-            <input type="hidden" name="mensagem" value="Inscrição na Newsletter"></input>
+
             <div class="flex flex-col md:flex-row gap-y-2 md:gap-y-0 md:gap-x-2 items-center">
               <CustomButton type="submit">
                 Inscrever-me!
