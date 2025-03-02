@@ -113,15 +113,15 @@ carregarProdutos().then(() => {
   <div>
     <!-- Seção de Produtos -->
     <div class="p-6">
-      <h1 class="text-center text-3xl font-bold mb-4">Produtos</h1>
+      <h1 class="text-center text-3xl font-bold mb-8">Produtos</h1>
       <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <div
           v-for="produto in produtos"
           :key="produto.id"
           class="product-card"
           :class="{
-            'bg-[#F6EFBD] border-4 border-[#E9B86C]': produto.estado === 1,
-            'bg-[#e5e4dc] border-4 border-[#E9B86C]': produto.estado === 0
+            'bg-[#F6EFBD] border-4 rounded border-[#E9B86C]': produto.estado === 1,
+            'bg-[#e5e4dc] border-4 rounded border-[#E9B86C]': produto.estado === 0
           }"
         >
           <router-link
@@ -172,107 +172,114 @@ carregarProdutos().then(() => {
       </div>
     </div>
 
-    <!-- Resumo da Compra -->
+    <!-- Card para Carrinho e Formulário -->
     <div class="p-6">
-      <h2 class="text-2xl font-bold mb-4">Resumo da Compra</h2>
-      <div v-if="selectedProducts.some((p) => p.quantidade > 0)">
-        <div v-for="product in selectedProducts" :key="product.id">
-          <div v-if="product.quantidade > 0" class="flex justify-between items-center mb-2">
-            <span>{{ product.nome }} ({{ product.quantidade }} x {{ product.preco }}€)</span>
-            <span>{{ ( product.quantidade * product.preco ).toFixed(2) }}€</span>
+      <div class="bg-[#F6EFBD] border-4 border-[#E9B86C] rounded-lg shadow-lg p-6">
+        <!-- Carrinho -->
+        <div class="mb-8">
+          <h2 class="text-2xl font-bold mb-4">Carrinho:</h2>
+          <div v-if="selectedProducts.some((p) => p.quantidade > 0)">
+            <div v-for="product in selectedProducts" :key="product.id">
+              <div v-if="product.quantidade > 0" class="flex justify-between items-center mb-2">
+                <span>{{ product.nome }} ({{ product.quantidade }} x {{ product.preco }}€)</span>
+                <span>{{ ( product.quantidade * product.preco ).toFixed(2) }}€</span>
+              </div>
+            </div>
+            <div class="mt-4 font-bold">
+              Total: {{ calculateTotalPrice() }}€
+            </div>
+            <div class="flex justify-end w-full items-center">
+              <CustomButton @click="clearSelectedProducts">
+                Limpar carrinho
+              </CustomButton>
+            </div>
+          </div>
+          <div v-else>
+            <p>Nenhum produto selecionado.</p>
           </div>
         </div>
-        <div class="mt-4 font-bold">
-          Total: {{ calculateTotalPrice() }}€
-        </div>
-        <div class="flex justify-end w-full items-center">
-          <CustomButton @click="clearSelectedProducts">
-            Limpar carrinho
-          </CustomButton>
+
+        <!-- Formulário de Finalização da Compra -->
+        <div>
+          <h2 class="text-2xl font-bold mb-4">Finalizar Compra</h2>
+          <form
+            target="_blank"
+            action="https://formsubmit.co/pracadoslivroslivres@gmail.com"
+            method="POST"
+            class="space-y-4"
+          >
+            <!-- Campos Ocultos para Formsubmit -->
+            <input type="hidden" name="mensagem" value="Novo pedido de compra!">
+            <input type="hidden" name="_subject" value="Novo pedido de compra!">
+            <input type="hidden" name="_next" value="http://192.168.1.64:5173/">
+            <input type="hidden" name="_template" value="table">
+
+            <!-- Nome e Apelido -->
+            <div class="flex flex-col md:flex-row gap-4">
+              <input
+              v-model="nome"
+              type="text"
+              name="nome"
+              class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+              placeholder="Nome"
+              required
+            />
+              <input
+              v-model="apelido"
+              type="text"
+              name="apelido"
+              class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+              placeholder="Apelido"
+              required
+            />
+            </div>
+
+            <!-- Morada -->
+            <input
+            v-model="morada"
+            type="text"
+            name="morada"
+            class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+            placeholder="Morada"
+            required
+          />
+
+            <!-- Número de Telemóvel -->
+            <input
+            v-model="mobileNumber"
+            type="text"
+            name="telemovel"
+            class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+            placeholder="Número de Telemóvel"
+            pattern="^(9\d{8}|2\d{8})$"
+            title="Telemovel do estilo XXXXXXXXX"
+            required
+          />
+
+            <!-- Produtos Selecionados (String Estática) -->
+            <input
+            type="hidden"
+            name="produtos"
+            :value="produtosSelecionadosString"
+          />
+
+            <!-- Total (Campo Estático) -->
+            <input
+            type="hidden"
+            name="total"
+            :value="calculateTotalPrice()"
+          />
+
+            <!-- Botão de Submissão -->
+            <button
+              type="submit"
+              class="px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]"
+            >
+              Realizar pedido!
+            </button>
+          </form>
         </div>
       </div>
-      <div v-else>
-        <p>Nenhum produto selecionado.</p>
-      </div>
-    </div>
-
-    <!-- Formulário de Finalização da Compra -->
-    <div class="p-6">
-      <h2 class="text-2xl font-bold mb-4">Finalizar Compra</h2>
-      <form
-        target="_blank"
-        action="https://formsubmit.co/pracadoslivroslivres@gmail.com"
-        method="POST"
-        class="space-y-4"
-      >
-        <!-- Campos Ocultos para Formsubmit -->
-        <input type="hidden" name="mensagem" value="Novo pedido de compra!">
-        <input type="hidden" name="_subject" value="Novo pedido de compra!">
-        <input type="hidden" name="_next" value="http://192.168.1.64:5173/">
-        <input type="hidden" name="_template" value="table">
-
-        <!-- Nome e Apelido -->
-        <div class="flex flex-col md:flex-row gap-4">
-          <input
-          v-model="nome"
-          type="text"
-          name="nome"
-          class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-          placeholder="Nome"
-          required
-        />
-          <input
-          v-model="apelido"
-          type="text"
-          name="apelido"
-          class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-          placeholder="Apelido"
-          required
-        />
-        </div>
-
-        <!-- Morada -->
-        <input
-        v-model="morada"
-        type="text"
-        name="morada"
-        class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-        placeholder="Morada"
-        required
-      />
-
-        <!-- Número de Telemóvel -->
-        <input
-        v-model="mobileNumber"
-        type="tel"
-        name="telemovel"
-        class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-        placeholder="Número de Telemóvel"
-        required
-      />
-
-        <!-- Produtos Selecionados (String Estática) -->
-        <input
-        type="hidden"
-        name="produtos"
-        :value="produtosSelecionadosString"
-      />
-
-        <!-- Total (Campo Estático) -->
-        <input
-        type="hidden"
-        name="total"
-        :value="calculateTotalPrice()"
-      />
-
-        <!-- Botão de Submissão -->
-        <button
-          type="submit"
-          class="px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]"
-        >
-          Realizar pedido!
-        </button>
-      </form>
     </div>
   </div>
 </template>

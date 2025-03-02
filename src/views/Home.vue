@@ -125,7 +125,8 @@ function closePrivacyPolicy(){
               <input type="text" name="nome" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Nome" required>
               <input type="text" name="apelido" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Apelido" required>
             </div>
-            <input type="email" name="email" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Endereço de Email" required>
+            <input type="email" name="email" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+              placeholder="Endereço de Email" pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"required>
 
             <div class="flex flex-col md:flex-row gap-y-2 md:gap-y-0 md:gap-x-2 items-center">
               <CustomButton type="submit">
