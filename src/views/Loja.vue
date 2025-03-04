@@ -201,7 +201,7 @@ carregarProdutos().then(() => {
 
         <!-- Formulário de Finalização da Compra -->
         <div>
-          <h2 class="text-2xl font-bold mb-4">Finalizar Compra</h2>
+          <h2 class="text-2xl font-bold mb-4">Dados do cliente:</h2>
           <form
             target="_blank"
             action="https://formsubmit.co/pracadoslivroslivres@gmail.com"

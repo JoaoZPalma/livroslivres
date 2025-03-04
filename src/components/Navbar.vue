@@ -24,7 +24,7 @@
           Inicio
         </router-link>
         <router-link
-          to="/about-us"
+          to="/quem-somos"
           @click="closeMenu"
           class="text-xl text-[#2E2E2E] hover:text-[#000] hover:underline transition duration-300 py-2 border-b border-[#E9B86C] md:border-none"
         >

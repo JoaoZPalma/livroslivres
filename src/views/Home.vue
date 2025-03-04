@@ -1,9 +1,10 @@
 <script setup>
-import { ref } from "vue";
+import { ref, onMounted } from "vue";
 import CustomButton  from '@/components/CustomButton.vue';
 import PrivacyPolicy  from '@/components/PrivacyPolicy.vue';
 import Mapa from '@/components/Mapa.vue';
 
+const sections = ref([]);
 const activeSection = ref(null);
 const enderecoEvento = ref("");
 const showPrivacyPolicy = ref(false);
@@ -33,13 +34,30 @@ function closePrivacyPolicy(){
   showPrivacyPolicy.value = false;
 }
 
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, {
+      threshold: 0.1
+    });
+
+  sections.value = document.querySelectorAll('.fade-in');
+  sections.value.forEach(section => {
+    observer.observe(section);
+  })
+})
+
 </script>
 
 <template>
   <div>
     <PrivacyPolicy :isOpen="showPrivacyPolicy" @close="closePrivacyPolicy" />
     <!-- First Section -->
-    <div class="bg-[#F6EFBD] p-6 shadow border-t-4 border-b-4 border-[#E9B86C]">
+    <div class="fade-in bg-[#F6EFBD] p-6 shadow border-t-4 border-b-4 border-[#E9B86C]">
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
         <!-- Text content -->
         <div class="flex-1 text-center md:text-left">
@@ -69,7 +87,7 @@ function closePrivacyPolicy(){
     </div>
 
     <!-- Event Section -->
-    <div class="bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+    <div class="fade-in bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-12 justify-center">
         <div class="w-72 h-auto flex-shrink-0">
           <Mapa :idEvento=1 @endereco-carregado="handleEnderecoCarregado" />
@@ -83,7 +101,7 @@ function closePrivacyPolicy(){
     </div>
 
     <!-- About Section -->
-    <div class="flex flex-col md:flex-row bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+    <div class="fade-in flex flex-col md:flex-row bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
       <!-- Texto e Botão -->
       <div class="flex-1 md:text-left md:pr-6">
         <p class="mt-4 lg:mt-0">
@@ -104,7 +122,7 @@ function closePrivacyPolicy(){
       </div>
     </div>
 
-<div class="bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+<div class="fade-in bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
   <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
     <div class="text-center md:text-left">
       <h2 class="font-bold text-xl md:text-3xl">Increve-te já na nossa Newsletter!</h2>
@@ -149,7 +167,7 @@ function closePrivacyPolicy(){
     </div>
 
     <!-- Footer -->
-    <div id="contactos" :class="['bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : '']">        <div class="flex items-center space-x-1">
+    <div id="contactos" :class="['fade-in bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : '']">        <div class="flex items-center space-x-1">
       <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor"></path>
         <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="currentColor"></path>
@@ -188,3 +206,16 @@ function closePrivacyPolicy(){
   </div>
 </template>
 
+
+<style>
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>
