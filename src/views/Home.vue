@@ -1,6 +1,7 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import CustomButton  from '@/components/CustomButton.vue';
+import Section  from '@/components/Section.vue';
 import PrivacyPolicy  from '@/components/PrivacyPolicy.vue';
 import Mapa from '@/components/Mapa.vue';
 
@@ -8,6 +9,7 @@ const sections = ref([]);
 const activeSection = ref(null);
 const enderecoEvento = ref("");
 const showPrivacyPolicy = ref(false);
+const showDonationForm = ref(false);
 
 function handleEnderecoCarregado(endereco){
   enderecoEvento.value=endereco;
@@ -19,6 +21,7 @@ const scrollToSection = (sectionId) => {
     section.scrollIntoView({ behavior: "smooth", block: "start" });
 
     activeSection.value = sectionId;
+
     setTimeout(() => {
       activeSection.value = null;
     }, 2000);
@@ -34,6 +37,11 @@ function closePrivacyPolicy(){
   showPrivacyPolicy.value = false;
 }
 
+const toggleDonationForm = () => {
+  showDonationForm.value = !showDonationForm.value;
+}
+
+
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
@@ -42,7 +50,7 @@ onMounted(() => {
       }
     });
   }, {
-      threshold: 0.1
+      threshold: 0.4
     });
 
   sections.value = document.querySelectorAll('.fade-in');
@@ -54,10 +62,10 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="p-6">
     <PrivacyPolicy :isOpen="showPrivacyPolicy" @close="closePrivacyPolicy" />
     <!-- First Section -->
-    <div class="fade-in bg-[#F6EFBD] p-6 shadow border-t-4 border-b-4 border-[#E9B86C]">
+    <Section>
       <div class="flex flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-6">
         <!-- Text content -->
         <div class="flex-1 text-center md:text-left">
@@ -80,14 +88,14 @@ onMounted(() => {
       <!-- Call to action -->
       <div class="flex flex-col items-center mt-4 space-y-2">
         <p class="font-light">Interessado?</p>
-        <CustomButton @click.prevent="scrollToSection('contactos')">
+        <CustomButton @click="scrollToSection('contactos')">
           Veja como nos pode contactar!
         </CustomButton>
       </div>
-    </div>
+    </Section>
 
     <!-- Event Section -->
-    <div class="fade-in bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+    <Section>
       <div class="flex flex-col md:flex-row items-center gap-4 md:gap-12 justify-center">
         <div class="w-72 h-auto flex-shrink-0">
           <Mapa :idEvento=1 @endereco-carregado="handleEnderecoCarregado" />
@@ -98,10 +106,10 @@ onMounted(() => {
         </div>
 
       </div>
-    </div>
+    </Section>
 
     <!-- About Section -->
-    <div class="fade-in flex flex-col md:flex-row bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
+    <Section class="flex flex-col md:flex-row text-center">
       <!-- Texto e Botão -->
       <div class="flex-1 md:text-left md:pr-6">
         <p class="mt-4 lg:mt-0">
@@ -110,23 +118,53 @@ onMounted(() => {
       </div>
 
       <!-- Imagem -->
-      <div class="w-max mx-auto md:ml-6 flex flex-col items-center mt-4">
-        <img
-        src="/icondaorganizacao.jpg"
-        alt="Exposição da atividade"
-        class="w-32 h-auto object-cover rounded-lg border-4 border-[#E9B86C]"
-      />
-        <CustomButton class="mt-4">
-          Realizar doação
-        </CustomButton>
-      </div>
-    </div>
+      <div class="w-max mx-auto md:ml-6 flex flex-col md:items-end items-center mt-4">
+        <div class="flex flex-col items-center">
+          <img
+          src="/icondaorganizacao.jpg"
+          alt="Exposição da atividade"
+          class="w-32 h-auto object-cover rounded-lg border-4 border-[#E9B86C]"
+        />
+          <CustomButton @click="toggleDonationForm" :class="['mt-4',
+          showDonationForm ? 'border-2 border-[#c49a5c] px-12' : ' ' ]">
+            {{ showDonationForm ? 'Cancelar' : 'Realizar doação'}}
+          </CustomButton>
+        </div>
+        <div v-if="showDonationForm" class="w-max flex flex-col items-end">
+          <form target="_blank" action="https://formsubmit.co/pracadoslivroslivres@gmail.com" method="POST" class="space-y-4">
+            <input type="hidden" name="mensagem" value="Doação via website"></input>
+            <!-- <input type="hidden" name="_next" value="https://yourdomain.co/thanks.html"> -->
+            <input type="hidden" name="_subject" value="Doação via website">
+            <input type="hidden" name="_template" value="table">
+            <div class="flex flex-col md:flex-row gap-4">
+              <input type="text" name="nome" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Nome" required>
+              <input type="text" name="apelido" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Apelido" required>
+            </div>
 
-<div class="fade-in bg-[#F6EFBD] p-6 shadow text-center border-t-4 border-b-4 border-[#E9B86C]">
-  <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
-    <div class="text-center md:text-left">
-      <h2 class="font-bold text-xl md:text-3xl">Increve-te já na nossa Newsletter!</h2>
-      <p class="mt-1">E recebe as mais novas novidades e avisos de futuros eventos!</p>
+            <div class="flex flex-col md:flex-row gap-4">
+              <!-- Input para o número de telemóvel -->
+              <input type="text" name="telemovel" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Número de Telemóvel" pattern="^(9\d{8}|2\d{8})$" title="Telemovel do estilo XXXXXXXXX" required/>
+
+              <!-- Contêiner para o input de valor com o símbolo de euro -->
+              <div class="relative w-full">
+                <input type="text" name="valor" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg pr-8" placeholder="Valor (ex: 10,00)" required pattern="\d+(,\d{2})?" title="Por favor, insira um valor monetário válido (ex: 10,00)"/>
+                <!-- Símbolo de euro -->
+                <span class="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">€</span>
+              </div>
+            </div>
+            <CustomButton type="submit">
+              Enviar pedido de doação
+            </CustomButton>
+          </form>
+        </div>
+      </div>
+    </Section>
+
+    <Section>
+      <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
+        <div class="text-center md:text-left">
+          <h2 class="font-bold text-xl md:text-3xl">Increve-te já na nossa Newsletter!</h2>
+          <p class="mt-1">E recebe as mais novas novidades e avisos de futuros eventos!</p>
           <p class="mt-1 font-light">Sabe mais sobre a nossa
             <span class="underline cursor-pointer hover:font-normal" @click="openPrivacyPolicy">
               política de privacidade!
@@ -164,10 +202,10 @@ onMounted(() => {
           </form>
         </div>
       </div>
-    </div>
+    </Section>
 
     <!-- Footer -->
-    <div id="contactos" :class="['fade-in bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : '']">        <div class="flex items-center space-x-1">
+    <Section id="contactos" :class="['fade-in bg-[#F6EFBD] p-6 shadow flex flex-col md:flex-row items-center justify-around space-y-2 md:space-y-0 md:space-x-8 text-center border-t-4 border-b-4 border-[#E9B86C]', activeSection === 'contactos' ? 'pulse-effect' : 'fade-in visible']">        <div class="flex items-center space-x-1">
       <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
         <path fill-rule="evenodd" clip-rule="evenodd" d="M12 18C15.3137 18 18 15.3137 18 12C18 8.68629 15.3137 6 12 6C8.68629 6 6 8.68629 6 12C6 15.3137 8.68629 18 12 18ZM12 16C14.2091 16 16 14.2091 16 12C16 9.79086 14.2091 8 12 8C9.79086 8 8 9.79086 8 12C8 14.2091 9.79086 16 12 16Z" fill="currentColor"></path>
         <path d="M18 5C17.4477 5 17 5.44772 17 6C17 6.55228 17.4477 7 18 7C18.5523 7 19 6.55228 19 6C19 5.44772 18.5523 5 18 5Z" fill="currentColor"></path>
@@ -202,7 +240,7 @@ onMounted(() => {
         <a href="https://www.facebook.com/pracadoslivroslivres" target="_blank"
           class="text-[#2E2E2E] hover:text-[#D17A22] underline">@pracadoslivroslivres</a>
       </div>
-    </div>
+    </Section>
   </div>
 </template>
 

@@ -65,7 +65,7 @@
       </div>
 
       <!-- Botão para Fechar o Modal -->
-      <button @click="close" class="mt-4 px-4 py-2 bg-[#E9B86C] text-white rounded-lg hover:bg-[#D9A65C] transition-colors">
+      <button @click="close" class="mt-4 px-4 py-2 bg-[#E9B86C] rounded-lg hover:bg-[#D9A65C] transition-colors">
         Fechar
       </button>
     </div>

@@ -44,13 +44,6 @@
         >
           Memorias
         </router-link>
-        <router-link
-          to="/doar"
-          @click="closeMenu"
-          class="text-xl font-medium text-[#2E2E2E] hover:text-[#000] hover:underline transition duration-300 py-2 md:py-0"
-        >
-          Doar
-        </router-link>
       </div>
     </div>
   </nav>

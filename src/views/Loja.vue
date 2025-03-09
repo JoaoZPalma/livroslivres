@@ -269,14 +269,20 @@ carregarProdutos().then(() => {
             name="total"
             :value="calculateTotalPrice()"
           />
+            <div class="flex flex-col items-center md:flex-row">
+              <!-- Botão -->
+              <button
+                type="submit"
+                class="w-full md:w-max px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]"
+              >
+                Realizar pedido!
+              </button>
 
-            <!-- Botão de Submissão -->
-            <button
-              type="submit"
-              class="px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]"
-            >
-              Realizar pedido!
-            </button>
+              <!-- Texto -->
+              <span class="font-light mt-2 md:mt-0 md:ml-3 text-center md:text-left">
+                A associação vai entrar em contacto assim que possível diretamente para confirmar e tratar do pagamento.
+              </span>
+            </div>
           </form>
         </div>
       </div>
