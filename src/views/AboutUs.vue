@@ -1,3 +1,31 @@
+<script setup>
+import { onMounted } from "vue";
+import { Swiper, SwiperSlide } from 'swiper/vue';
+import { Navigation, Pagination } from 'swiper/modules';
+import Section  from '@/components/Section.vue';
+import 'swiper/css';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
+
+onMounted(() => {
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("visible");
+      }
+    });
+  }, {
+    threshold: 0.1,
+  });
+
+  const sections = document.querySelectorAll(".fade-in");
+  sections.forEach((section) => {
+    observer.observe(section);
+  });
+});
+</script>
+
+
 <template>
   <div class="min-h-screen p-6">
     <!-- Header -->
@@ -8,25 +36,25 @@
     </div>
 
     <!-- O Que Fazemos -->
-    <div class="fade-in bg-white p-8 rounded-lg shadow-lg mb-12 border-4 border-[#E9B86C]">
+    <Section>
       <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-4">Não só contamos, como também
         temos história...</h2>
       <p class="text-[#2E2E2E]">
         Rebebebeu pardais ao ninho
       </p>
-    </div>
+    </Section>
 
     <!-- Porque o Fazemos -->
-    <div class="fade-in bg-white p-8 rounded-lg shadow-lg mb-12 border-4 border-[#E9B86C]">
+    <Section>
       <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-4">Mas afinal fazemo-lo porquê?</h2>
       <p class="text-[#2E2E2E]">
         olha porque há que se fazer alguma coisa se não dá-se em doido e isto dos putos até é
         engraçado por mais que não seja fácil
       </p>
-    </div>
+    </Section>
 
     <!-- A Nossa Equipa -->
-    <div class="fade-in bg-white p-8 rounded-lg shadow-lg mb-12 border-4 border-[#E9B86C]">
+    <Section>
       <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-8">Membros maravilhosos da nossa
         equipa!</h2>
       <!-- Carrossel de Membros -->
@@ -76,11 +104,12 @@
 
         <!-- Adicionar mais membros -->
       </Swiper>
-    </div>
+    </Section>
 
     <!-- Parcerias e Apoios -->
-    <div class="fade-in bg-white p-8 rounded-lg shadow-lg mb-12 border-4 border-[#E9B86C]">
-      <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-4">Parcerias e Apoios</h2>
+    <Section>
+
+      <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-4">Parcerias e Apoios:</h2>
       <p class="text-[#2E2E2E] mb-6">
         <!-- Adicione aqui o texto sobre as parcerias e apoios. -->
       </p>
@@ -105,35 +134,9 @@
 
         <!-- Adicione mais logos conforme necessário -->
       </div>
+    </Section>
     </div>
-  </div>
 </template>
-
-<script setup>
-import { onMounted } from "vue";
-import { Swiper, SwiperSlide } from 'swiper/vue';
-import { Navigation, Pagination } from 'swiper/modules';
-import 'swiper/css';
-import 'swiper/css/navigation';
-import 'swiper/css/pagination';
-
-onMounted(() => {
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry) => {
-      if (entry.isIntersecting) {
-        entry.target.classList.add("visible");
-      }
-    });
-  }, {
-    threshold: 0.1,
-  });
-
-  const sections = document.querySelectorAll(".fade-in");
-  sections.forEach((section) => {
-    observer.observe(section);
-  });
-});
-</script>
 
 <style scoped>
 .fade-in {

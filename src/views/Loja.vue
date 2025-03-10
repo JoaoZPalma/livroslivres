@@ -7,6 +7,13 @@ const mobileNumber = ref(""); // Armazena o número de telemóvel
 const nome = ref(""); // Armazena o nome
 const apelido = ref(""); // Armazena o apelido
 const morada = ref(""); // Armazena a morada
+let intervalId = null;
+const isHolding = ref(false);
+const showPaymentTypes = ref(false);
+
+function togglePaymentTypes(){
+  showPaymentTypes.value = !showPaymentTypes.value;
+}
 
 // Carregar produtos
 async function carregarProdutos() {
@@ -36,12 +43,27 @@ function initializeSelectedProducts() {
   }
 }
 
+function startInterval(action) {
+  if (intervalId) return; // Evitar múltiplos intervalos
+  intervalId = setInterval(() => {
+    action(); // Executar a ação (incrementar ou decrementar)
+  }, 100); // Ajuste o intervalo para controlar a velocidade
+}
+
+// Função para parar o intervalo
+function stopInterval() {
+  if (intervalId) {
+    clearInterval(intervalId);
+    intervalId = null;
+  }
+}
+
 // Incrementar quantidade de um produto
 function incrementQuantity(produtoId) {
   const selectedProduct = selectedProducts.value.find((p) => p.id === produtoId);
   if (selectedProduct) {
     selectedProduct.quantidade += 1;
-    saveSelectedProducts(); // Salvar no sessionStorage
+    saveSelectedProducts();
   }
 }
 
@@ -50,7 +72,7 @@ function decrementQuantity(produtoId) {
   const selectedProduct = selectedProducts.value.find((p) => p.id === produtoId);
   if (selectedProduct && selectedProduct.quantidade > 0) {
     selectedProduct.quantidade -= 1;
-    saveSelectedProducts(); // Salvar no sessionStorage
+    saveSelectedProducts();
   }
 }
 
@@ -113,7 +135,7 @@ carregarProdutos().then(() => {
   <div>
     <!-- Seção de Produtos -->
     <div class="p-6">
-      <h1 class="text-center text-3xl font-bold mb-8">Produtos</h1>
+      <h1 class="text-center text-4xl md:text-5xl font-bold mb-8">Produtos</h1>
       <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <div
           v-for="produto in produtos"
@@ -154,15 +176,25 @@ carregarProdutos().then(() => {
 
           <div v-if="produto.estado === 1" class="quantity-controls">
             <button
-              @click.stop="decrementQuantity(produto.id)"
+              @click="decrementQuantity(produto.id)"
+              @mousedown="startInterval(() => decrementQuantity(produto.id))"
+              @mouseup="stopInterval"
+              @touchstart="startInterval(() => decrementQuantity(produto.id))"
+              @touchend="stopInterval"
               class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]"
               :disabled="selectedProducts.find((p) => p.id === produto.id)?.quantidade === 0"
             >
               -
             </button>
-            <span class="flex items-center justify-center">{{ selectedProducts.find((p) => p.id === produto.id)?.quantidade || 0 }}</span>
+            <span class="flex items-center justify-center">
+              {{ selectedProducts.find((p) => p.id === produto.id)?.quantidade || 0 }}
+            </span>
             <button
-              @click.stop="incrementQuantity(produto.id)"
+              @click="incrementQuantity(produto.id)"
+              @mousedown="startInterval(() => incrementQuantity(produto.id))"
+              @mouseup="stopInterval"
+              @touchstart="startInterval(() => incrementQuantity(produto.id))"
+              @touchend="stopInterval"
               class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]"
             >
               +
@@ -177,7 +209,10 @@ carregarProdutos().then(() => {
       <div class="bg-[#F6EFBD] border-4 border-[#E9B86C] rounded-lg shadow-lg p-6">
         <!-- Carrinho -->
         <div class="mb-8">
-          <h2 class="text-2xl font-bold mb-4">Carrinho:</h2>
+          <div class="flex flex-row items-center mb-4 space-x-1">
+          <svg class="w-6 h-6 text-[#2E2E2E]" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+          <h2 class="text-2xl font-bold">Carrinho:</h2>
+          </div>
           <div v-if="selectedProducts.some((p) => p.quantidade > 0)">
             <div v-for="product in selectedProducts" :key="product.id">
               <div v-if="product.quantidade > 0" class="flex justify-between items-center mb-2">
@@ -278,10 +313,36 @@ carregarProdutos().then(() => {
                 Realizar pedido!
               </button>
 
-              <!-- Texto -->
-              <span class="font-light mt-2 md:mt-0 md:ml-3 text-center md:text-left">
-                A associação vai entrar em contacto assim que possível diretamente para confirmar e tratar do pagamento.
-              </span>
+              <div class="relative inline-block">
+                <!-- Texto -->
+                <span class="font-light mt-2 md:mt-0 md:ml-3 text-center md:text-left">
+                  A Associação vai entrar em contacto assim que possível diretamente para confirmar e tratar do
+                  <span
+                    @click="togglePaymentTypes"
+                    :class="{
+                    'underline cursor-pointer hover:font-normal' : true,
+                    'font-normal' : showPaymentTypes
+                    }">
+                    pagamento
+                  </span>
+                </span>
+
+                <div
+                  v-if="showPaymentTypes"
+                  class="absolute left-1/3 md:left-full bottom-1/3 md:bottom-full mt-1 w-48 p-2 text-xs bg-white border border-gray-200 shadow-md rounded-md text-gray-700 z-50"
+                >
+                  É possível pagar com:
+                  <ul class="list-disc ml-4">
+                    <li>MBWay</li>
+                    <li>Transferência bancária</li>
+                    <li>PayPal</li>
+                    <li>Em Pessoa</li>
+                  </ul>
+                </div>
+
+
+              </div>
+
             </div>
           </form>
         </div>
