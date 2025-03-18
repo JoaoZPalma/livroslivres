@@ -53,62 +53,9 @@ onMounted(() => {
       </p>
     </Section>
 
-    <!-- A Nossa Equipa -->
-    <Section>
-      <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-8">Membros maravilhosos da nossa
-        equipa!</h2>
-      <!-- Carrossel de Membros -->
-      <Swiper
-        :modules="[Navigation, Pagination]"
-        :spaceBetween="20"
-        :slidesPerView="1"
-        :navigation="true"
-        :pagination="{ clickable: true }"
-        :breakpoints="{
-          320: { slidesPerView: 2 },
-          768: { slidesPerView: 4 }
-        }"
-        class="mt-2"
-      >
-        <!-- Membro 1 -->
-        <SwiperSlide>
-          <div class="text-center">
-            <img
-              src="/equipa_fotos/ines_zarcos.jpg"
-              alt="Maria Inês"
-              class="w-32 h-32 mx-auto rounded-full border-4 border-[#E9B86C]"
-            />
-            <h3 class="font-bold text-xl mt-4 text-[#2E2E2E]">Maria Inês Zarcos</h3>
-            <p class="text-[#2E2E2E]">Contadora de Histórias</p>
-            <p class="text-[#2E2E2E] mt-1 font-light">
-              Rapariga fenomenal pá.
-            </p>
-          </div>
-        </SwiperSlide>
-
-        <!-- Membro 2 -->
-        <SwiperSlide>
-          <div class="text-center">
-            <img
-              src="/equipa_fotos/ines_zarcos.jpg"
-              alt="Nome do Membro"
-              class="w-32 h-32 mx-auto rounded-full border-4 border-[#E9B86C]"
-            />
-            <h3 class="font-bold text-xl mt-4 text-[#2E2E2E]">Nome do Membro</h3>
-            <p class="text-[#2E2E2E]">Cargo/Função</p>
-            <p class="text-[#2E2E2E] mt-2">
-              <!-- Breve descrição sobre o membro. -->
-            </p>
-          </div>
-        </SwiperSlide>
-
-        <!-- Adicionar mais membros -->
-      </Swiper>
-    </Section>
 
     <!-- Parcerias e Apoios -->
-    <Section>
-
+    <Section class="invisible">
       <h2 class="font-bold text-2xl md:text-3xl text-[#2E2E2E] mb-4">Parcerias e Apoios:</h2>
       <p class="text-[#2E2E2E] mb-6">
         <!-- Adicione aqui o texto sobre as parcerias e apoios. -->

@@ -136,7 +136,8 @@ carregarProdutos().then(() => {
     <!-- Seção de Produtos -->
     <div class="p-6">
       <h1 class="text-center text-4xl md:text-5xl font-bold mb-8">Produtos</h1>
-      <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
+      <div class="text-center text-2xl md:text-3xl font-normal mb-8" >Brevemente!!</div>
+      <!-- <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <div
           v-for="produto in produtos"
           :key="produto.id"
@@ -202,6 +203,7 @@ carregarProdutos().then(() => {
           </div>
         </div>
       </div>
+-->
     </div>
 
     <!-- Card para Carrinho e Formulário -->

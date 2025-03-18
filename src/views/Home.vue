@@ -100,7 +100,7 @@ onMounted(() => {
           <Mapa :idEvento=1 @endereco-carregado="handleEnderecoCarregado" />
         </div>
         <div class="text-center md:text-left">
-          <h2 class="font-bold text-xl md:text-2xl">Próximo Evento, vem nos ver!</h2>
+          <h2 class="font-bold text-xl md:text-2xl">Próximo Evento, esperamos por si!</h2>
           <p v-if="enderecoEvento" class="mt-2">Localização:<br> {{ enderecoEvento }}</p>
         </div>
 
@@ -162,8 +162,8 @@ onMounted(() => {
     <Section>
       <div class="flex flex-col md:flex-row gap-6 md:gap-24 items-center justify-center">
         <div class="text-center md:text-left">
-          <h2 class="font-bold text-xl md:text-3xl">Increve-te já na nossa Newsletter!</h2>
-          <p class="mt-1">E recebe as mais novas novidades e avisos de futuros eventos!</p>
+          <h2 class="font-bold text-xl md:text-3xl">Inscreva-se já na nossa Newsletter!</h2>
+          <p class="mt-1">E receba as mais novas novidades e avisos de futuros eventos!</p>
           <p class="mt-1 font-light">Sabe mais sobre a nossa
             <span class="underline cursor-pointer hover:font-normal" @click="openPrivacyPolicy">
               Política de Privacidade!
@@ -217,7 +217,7 @@ onMounted(() => {
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
           <path d="M6.62 10.79a15.91 15.91 0 006.58 6.58l2.2-2.2c.27-.27.66-.36 1.02-.24a10.05 10.05 0 003.16.51c.55 0 1 .45 1 1v3.34c0 .55-.45 1-1 1A19.91 19.91 0 012 4c0-.55.45-1 1-1h3.34c.55 0 1 .45 1 1 0 1.1.17 2.17.51 3.16.12.36.03.75-.24 1.02l-2.2 2.2z"/>
         </svg>
-        <a href="tel:241031836" class="hover:text-[#D17A22] underline">241031836</a>
+        <a href="tel:936121122" class="hover:text-[#D17A22] underline">936121122</a>
       </div>
       <div class="flex items-center space-x-1">
         <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
