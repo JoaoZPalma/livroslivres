@@ -49,7 +49,7 @@ onMounted(() => {
       }
     });
   }, {
-      threshold: 0.4
+      threshold: 0.2
     });
 
   sections.value = document.querySelectorAll('.fade-in');
@@ -64,44 +64,44 @@ onMounted(() => {
   <div class="p-6">
     <PrivacyPolicy :isOpen="showPrivacyPolicy" @close="closePrivacyPolicy" />
     <!-- First Section -->
-<Section>
-  <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
-    <!-- Text content -->
-    <div class="flex-1 text-center md:text-left space-y-4">
-      <h2 class="font-bold text-2xl md:text-4xl">Se quer entretenimento saudável e estimulante para os mais pequenos...</h2>
-      <p class="text-lg md:text-xl">Descubra o mundo mágico dos livros que inspiram a imaginação e cultivam o amor pela leitura desde cedo!</p>
-      <div class="mt-6">
-        <p class="text-lg md:text-xl font-semibold">Oferecemos experiências únicas e memoráveis para crianças e famílias:</p>
-        <ul class="text-lg md:text-xl ml-2 md:list-disc list-inside space-y-3 mt-3 text-centertext-center  md:text-left">
-          <li class="gap-2">🎉 Festas de aniversário temáticas</li>
-          <li class="gap-2">📖 Sessões de leitura de contos interativas</li>
-          <li class="gap-2">🎨 Oficinas criativas e educativas</li>
-          <li class="gap-2">🌟 Eventos especiais para escolas e comunidades</li>
-        </ul>
+    <Section>
+      <div class="flex flex-col md:flex-row space-y-6 md:space-y-0 md:space-x-8">
+        <!-- Text content -->
+        <div class="flex-1 text-center md:text-left space-y-4">
+          <h2 class="font-bold text-2xl md:text-4xl">Se quer entretenimento saudável e estimulante para os mais pequenos...</h2>
+          <p class="text-lg md:text-xl">Descubra o mundo mágico dos livros que inspiram a imaginação e cultivam o amor pela leitura desde cedo!</p>
+          <div class="mt-6">
+            <p class="text-lg md:text-xl font-semibold">Oferecemos experiências únicas e memoráveis para crianças e famílias:</p>
+            <ul class="text-lg md:text-xl ml-2 md:list-disc list-inside space-y-3 mt-3 text-centertext-center  md:text-left">
+              <li class="gap-2">🎉 Festas de aniversário temáticas</li>
+              <li class="gap-2">📖 Sessões de leitura de contos interativas</li>
+              <li class="gap-2">🎨 Oficinas criativas e educativas</li>
+              <li class="gap-2">🌟 Eventos especiais para escolas e comunidades</li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Image -->
+        <div class="w-full max-w-xs mx-auto md:max-w-sm md:w-1/3">
+          <img
+          src="/iwantyoutobemineagainbaby.jpg"
+          alt="Exposição da atividade"
+          class="w-full h-auto object-cover rounded-lg border-4 border-[#E9B86C] hover:scale-105 transition-transform duration-300"
+        />
+        </div>
       </div>
-    </div>
 
-    <!-- Image -->
-    <div class="w-full max-w-xs mx-auto md:max-w-sm md:w-1/3">
-      <img
-        src="/iwantyoutobemineagainbaby.jpg"
-        alt="Exposição da atividade"
-        class="w-full h-auto object-cover rounded-lg border-4 border-[#E9B86C] hover:scale-105 transition-transform duration-300"
-      />
-    </div>
-  </div>
-
-  <!-- Call to action -->
-  <div class="flex flex-col items-center mt-6 space-y-3 text-center">
-    <p class="font-light text-lg">Traga magia e diversão para o seu evento connosco!</p>
-    <CustomButton @click="scrollToSection('contactos')" class="flex items-center gap-2">
-      <span>Reserve já o seu evento!</span>
-      <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
-      </svg>
-    </CustomButton>
-  </div>
-</Section>
+      <!-- Call to action -->
+      <div class="flex flex-col items-center mt-6 space-y-3 text-center">
+        <p class="font-light text-lg">Traga magia e diversão para o seu evento connosco!</p>
+        <CustomButton @click="scrollToSection('contactos')" class="flex items-center gap-2">
+          <span>Reserve já o seu evento!</span>
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
+          </svg>
+        </CustomButton>
+      </div>
+    </Section>
 
     <!-- Event Section -->
     <Section>
@@ -134,8 +134,8 @@ onMounted(() => {
           alt="Exposição da atividade"
           class="w-32 h-auto object-cover rounded-lg border-4 border-[#E9B86C]"
         />
-          <CustomButton @click="toggleDonationForm" :class="['mt-4',
-            showDonationForm ? 'border-2 border-[#c49a5c] px-12' : ' ' ]">
+          <CustomButton @click="toggleDonationForm" :class="['mt-4 w-44',
+            showDonationForm ? 'border-2 border-[#c49a5c]' : ' ' ]">
             {{ showDonationForm ? 'Cancelar' : 'Realizar doação'}}
           </CustomButton>
         </div>
@@ -247,7 +247,7 @@ onMounted(() => {
             13H14V20H18C19.1046 20 20 19.1046 20 18V6C20 4.89543 19.1046 4 18 4H6Z"
             fill="currentColor"></path>
         </svg>
-        <a href="https://www.facebook.com/pracadoslivroslivres" target="_blank"
+        <a href="https://www.facebook.com/people/Associa%C3%A7%C3%A3o-Pra%C3%A7a-dos-Livros-Livres/61558057513441/" target="_blank"
           class="text-[#2E2E2E] hover:text-[#D17A22] underline">@pracadoslivroslivres</a>
       </div>
     </Section>
