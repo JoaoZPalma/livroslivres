@@ -3,8 +3,9 @@
     <div class="md:mx-8 px-4 py-4 flex justify-between items-center">
       <!-- Logo or Association Name -->
       <router-link to="/" @click="closeMenu" class="text-left text-3xl font-medium text-[#2E2E2E]">
-        Associação<br>Praça dos Livros Livres
-      </router-link>
+        <h1>
+          Associação<br>Praça dos Livros Livres
+        </h1>      </router-link>
 
       <!-- Hamburger Menu for Mobile -->
       <button @click="toggleMenu" class="md:hidden text-[#2E2E2E] focus:outline-none">
