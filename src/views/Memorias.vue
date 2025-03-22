@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { useSeoMeta } from '@unhead/vue'
 
 // Armazena as memórias
 const memorias = ref([]);
@@ -17,6 +18,15 @@ async function carregarMemorias() {
 
 // Carregar as memórias ao montar o componente
 carregarMemorias();
+
+useSeoMeta({
+  title: 'Memórias | Praça dos Livros Livres',
+  description: 'Descobre as memórias que criamos juntos na Praça dos Livros Livres em Tavira!',
+  keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, eventos para crianças, leitura',
+  ogTitle: 'Memórias | Praça dos Livros Livres',
+  ogDescription: 'Descobre as memórias que criamos juntos na Praça dos Livros Livres em Tavira!',
+  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+})
 </script>
 
 <template>

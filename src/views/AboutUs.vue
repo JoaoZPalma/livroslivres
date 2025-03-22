@@ -6,6 +6,7 @@ import Section  from '@/components/Section.vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import { useSeoMeta } from '@unhead/vue'
 
 onMounted(() => {
   const observer = new IntersectionObserver((entries) => {
@@ -23,6 +24,15 @@ onMounted(() => {
     observer.observe(section);
   });
 });
+
+useSeoMeta({
+  title: 'Quem Somos | Praça dos Livros Livres',
+  description: 'Descobre mais sobre a nossa organização sem fins lucrativos Praça dos Livros Livres em Tavira!',
+  keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, eventos para crianças, leitura, informações',
+  ogTitle: 'Memórias | Praça dos Livros Livres',
+  ogDescription: 'Descobre mais sobre a nossa organização sem fins lucrativos Praça dos Livros Livres em Tavira!',
+  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+})
 </script>
 
 

@@ -1,6 +1,7 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
 import CustomButton from "@/components/CustomButton.vue";
+import { useSeoMeta } from '@unhead/vue'
 const produtos = ref([]);
 const selectedProducts = ref([]); // Armazena os produtos selecionados e suas quantidades
 const mobileNumber = ref(""); // Armazena o número de telemóvel
@@ -129,6 +130,16 @@ function validateForm() {
 carregarProdutos().then(() => {
   initializeSelectedProducts();
 });
+
+useSeoMeta({
+  title: 'Loja | Praça dos Livros Livres',
+  description: 'Descobre os produtos da Praça dos Livros Livres em Tavira!',
+  keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, produtos artesanais',
+  ogTitle: 'Loja | Praça dos Livros Livres',
+  ogDescription: 'Descobre os produtos da Praça dos Livros Livres em Tavira!',
+  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+})
+
 </script>
 
 <template>
