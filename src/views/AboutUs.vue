@@ -64,7 +64,7 @@ onMounted(() => {
         <!-- Logo 1 -->
         <div class="flex items-center justify-center">
           <img
-            src="/icondaorganizacao.jpg"
+            src="/logo.jpg"
             alt="Logo Parceiro"
             class="w-32 h-auto"
           />
@@ -73,7 +73,7 @@ onMounted(() => {
         <!-- Logo 2 -->
         <div class="flex items-center justify-center">
           <img
-            src="/icondaorganizacao.jpg"
+            src="/logo.jpg"
             alt="Logo Parceiro"
             class="w-32 h-auto"
           />

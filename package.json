@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@tailwindcss/postcss": "^4.0.5",
+    "@unhead/vue": "^2.0.0-rc.13",
     "autoprefixer": "^10.4.20",
     "leaflet": "^1.9.4",
     "pinia": "^2.3.1",

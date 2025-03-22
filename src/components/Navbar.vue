@@ -5,7 +5,8 @@
       <router-link to="/" @click="closeMenu" class="text-left text-3xl font-medium text-[#2E2E2E]">
         <h1>
           Associação<br>Praça dos Livros Livres
-        </h1>      </router-link>
+        </h1>
+      </router-link>
 
       <!-- Hamburger Menu for Mobile -->
       <button @click="toggleMenu" class="md:hidden text-[#2E2E2E] focus:outline-none">

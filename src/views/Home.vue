@@ -4,6 +4,7 @@ import CustomButton  from '@/components/CustomButton.vue';
 import Section  from '@/components/Section.vue';
 import PrivacyPolicy  from '@/components/PrivacyPolicy.vue';
 import Mapa from '@/components/Mapa.vue';
+import { useSeoMeta } from '@unhead/vue'
 
 const sections = ref([]);
 const activeSection = ref(null);
@@ -58,6 +59,15 @@ onMounted(() => {
   })
 })
 
+useSeoMeta({
+  title: 'Início | Praça dos Livros Livres',
+  description: 'Descobre a Praça dos Livros Livres em Tavira! Oferecemos festas temáticas, leituras interativas, oficinas criativas e eventos para escolas e famílias!',
+  keywords: 'Tavira, Algarve, eventos para crianças, workshops criativos, sessões de leitura, sem fins lucrativos, praca dos livros livres',
+  ogTitle: 'Início | Praça dos Livros Livres',
+  ogDescription: 'Descobre a Praça dos Livros Livres, eventos para crianças em Tavira',
+  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+})
+
 </script>
 
 <template>
@@ -84,7 +94,7 @@ onMounted(() => {
         <!-- Image -->
         <div class="w-full max-w-xs mx-auto md:max-w-sm md:w-1/3">
           <img
-          src="/iwantyoutobemineagainbaby.jpg"
+          src="/fotoEventoExemplo.jpg"
           alt="Exposição da atividade"
           class="w-full h-auto object-cover rounded-lg border-4 border-[#E9B86C] hover:scale-105 transition-transform duration-300"
         />
@@ -130,7 +140,7 @@ onMounted(() => {
       <div class="w-max mx-auto md:ml-6 flex flex-col md:items-end items-center mt-4">
         <div class="flex flex-col items-center">
           <img
-          src="/icondaorganizacao.jpg"
+          src="/logo.jpg"
           alt="Exposição da atividade"
           class="w-32 h-auto object-cover rounded-lg border-4 border-[#E9B86C]"
         />
