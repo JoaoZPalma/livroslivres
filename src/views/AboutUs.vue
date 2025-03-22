@@ -31,7 +31,7 @@ useSeoMeta({
   keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, eventos para crianças, leitura, informações',
   ogTitle: 'Memórias | Praça dos Livros Livres',
   ogDescription: 'Descobre mais sobre a nossa organização sem fins lucrativos Praça dos Livros Livres em Tavira!',
-  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+  ogImage: 'https://pracadoslivroslivres.org/favicon.ico'
 })
 </script>
 

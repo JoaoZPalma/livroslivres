@@ -137,7 +137,7 @@ useSeoMeta({
   keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, produtos artesanais',
   ogTitle: 'Loja | Praça dos Livros Livres',
   ogDescription: 'Descobre os produtos da Praça dos Livros Livres em Tavira!',
-  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+  ogImage: 'https://pracadoslivroslivres.org/favicon.ico'
 })
 
 </script>

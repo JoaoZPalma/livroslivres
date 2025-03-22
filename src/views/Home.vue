@@ -65,7 +65,7 @@ useSeoMeta({
   keywords: 'Tavira, Algarve, eventos para crianças, workshops criativos, sessões de leitura, sem fins lucrativos, praca dos livros livres',
   ogTitle: 'Início | Praça dos Livros Livres',
   ogDescription: 'Descobre a Praça dos Livros Livres, eventos para crianças em Tavira',
-  ogImage: 'https://pracadoslivroslivres.org/logo.jpg'
+  ogImage: 'https://pracadoslivroslivres.org/favicon.ico'
 })
 
 </script>
