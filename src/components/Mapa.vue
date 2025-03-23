@@ -28,14 +28,13 @@ async function carregarLocalizacao() {
 
     // Encontra o evento correspondente ao ID passado
     const eventoSelecionado = dados.eventos.find(evento => evento.id === props.idEvento);
-    console.log("Evento encontrado:", eventoSelecionado);
 
     if (map.value && eventoSelecionado) {
       // Se um evento for encontrado, reposiciona o mapa
       map.value.setView([eventoSelecionado.lat, eventoSelecionado.lng], 15);
 
       // Adiciona o marcador ao mapa
-      L.marker([eventoSelecionado.lat, eventoSelecionado.lng])
+      L.marker([eventoSelecionado.lat, eventoSelecionado.lng], {alt: 'Mapa a localizar o evento com um pin'})
         .addTo(map.value)
         .openPopup();
 
@@ -51,7 +50,7 @@ onMounted(() => {
   map.value = L.map(mapContainer.value).setView([0, 0], 2); // Inicializa o mapa com um zoom global
 
   L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    attribution: '&copy; <a alt="Biblioteca de Javascript usada para mostrar o mapa" href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
   }).addTo(map.value);
 
   carregarLocalizacao();
