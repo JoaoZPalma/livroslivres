@@ -2,7 +2,7 @@
 import { onMounted } from "vue";
 import { Swiper, SwiperSlide } from 'swiper/vue';
 import { Navigation, Pagination } from 'swiper/modules';
-import Section  from '@/components/Section.vue';
+import Section from '@/components/Section.vue';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -31,7 +31,7 @@ useSeoMeta({
   keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, eventos para crianças, leitura, informações',
   ogTitle: 'Memórias | Praça dos Livros Livres',
   ogDescription: 'Descobre mais sobre a nossa organização sem fins lucrativos Praça dos Livros Livres em Tavira!',
-  ogImage: 'https://pracadoslivroslivres.org/favicon.ico'
+  ogImage: 'https://www.pracadoslivroslivres.org/favicon.ico'
 })
 </script>
 
@@ -73,26 +73,18 @@ useSeoMeta({
       <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
         <!-- Logo 1 -->
         <div class="flex items-center justify-center">
-          <img
-            src="/logo.jpg"
-            alt="Logo Parceiro"
-            class="w-32 h-auto"
-          />
+          <img src="/logo.jpg" alt="Logo Parceiro" class="w-32 h-auto" />
         </div>
 
         <!-- Logo 2 -->
         <div class="flex items-center justify-center">
-          <img
-            src="/logo.jpg"
-            alt="Logo Parceiro"
-            class="w-32 h-auto"
-          />
+          <img src="/logo.jpg" alt="Logo Parceiro" class="w-32 h-auto" />
         </div>
 
         <!-- Adicione mais logos conforme necessário -->
       </div>
     </Section>
-    </div>
+  </div>
 </template>
 
 <style scoped>
@@ -108,26 +100,34 @@ useSeoMeta({
 }
 
 /* Estilizando as setas do Swiper */
-.swiper-button-prev, .swiper-button-next {
-  color: #2e2e2e; /* Cor das setas */
-  border-radius: 50%; /* Botões redondos */
-  padding: 3vh; /* Espaçamento para tornar os botões maiores */
+.swiper-button-prev,
+.swiper-button-next {
+  color: #2e2e2e;
+  /* Cor das setas */
+  border-radius: 50%;
+  /* Botões redondos */
+  padding: 3vh;
+  /* Espaçamento para tornar os botões maiores */
 }
 
 /* Efeito ao passar o mouse */
-.swiper-button-prev:hover, .swiper-button-next:hover {
-  color: #000; /* Cor branca das setas no hover */
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  color: #000;
+  /* Cor branca das setas no hover */
 }
 
 /* Estilo da paginação */
 .swiper-pagination-bullet {
-  background-color: #F6EFBD; /* Cor das bolinhas da paginação */
+  background-color: #F6EFBD;
+  /* Cor das bolinhas da paginação */
   border-color: 2px solid #000;
   opacity: 0.5;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #E9B86C; /* Cor da bolinha ativa */
+  background-color: #E9B86C;
+  /* Cor da bolinha ativa */
   opacity: 1;
 }
 </style>

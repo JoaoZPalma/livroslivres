@@ -12,7 +12,7 @@ let intervalId = null;
 const isHolding = ref(false);
 const showPaymentTypes = ref(false);
 
-function togglePaymentTypes(){
+function togglePaymentTypes() {
   showPaymentTypes.value = !showPaymentTypes.value;
 }
 
@@ -104,7 +104,7 @@ function clearSelectedProducts() {
 }
 
 function safelyClearSelectedProducts() {
-  if (!validateForm()){
+  if (!validateForm()) {
     return;
   }
   clearSelectedProducts();
@@ -137,7 +137,7 @@ useSeoMeta({
   keywords: 'Tavira, Algarve, sem fins lucrativos, praca dos livros livres, produtos artesanais',
   ogTitle: 'Loja | Praça dos Livros Livres',
   ogDescription: 'Descobre os produtos da Praça dos Livros Livres em Tavira!',
-  ogImage: 'https://pracadoslivroslivres.org/favicon.ico'
+  ogImage: 'https://www.pracadoslivroslivres.org/favicon.ico'
 })
 
 </script>
@@ -147,7 +147,7 @@ useSeoMeta({
     <!-- Seção de Produtos -->
     <div class="p-6">
       <h1 class="text-center text-4xl md:text-5xl font-bold mb-8">Produtos</h1>
-      <div class="text-center text-2xl md:text-3xl font-normal mb-8" >Brevemente!!</div>
+      <div class="text-center text-2xl md:text-3xl font-normal mb-8">Brevemente!!</div>
       <!-- <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
         <div
           v-for="produto in produtos"
@@ -223,14 +223,22 @@ useSeoMeta({
         <!-- Carrinho -->
         <div class="mb-8">
           <div class="flex flex-row items-center mb-4 space-x-1">
-          <svg class="w-6 h-6 text-[#2E2E2E]" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
-          <h2 class="text-2xl font-bold">Carrinho:</h2>
+            <svg class="w-6 h-6 text-[#2E2E2E]" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
+              <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
+              <g id="SVGRepo_iconCarrier">
+                <path
+                  d="M6.29977 5H21L19 12H7.37671M20 16H8L6 3H3M9 20C9 20.5523 8.55228 21 8 21C7.44772 21 7 20.5523 7 20C7 19.4477 7.44772 19 8 19C8.55228 19 9 19.4477 9 20ZM20 20C20 20.5523 19.5523 21 19 21C18.4477 21 18 20.5523 18 20C18 19.4477 18.4477 19 19 19C19.5523 19 20 19.4477 20 20Z"
+                  stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path>
+              </g>
+            </svg>
+            <h2 class="text-2xl font-bold">Carrinho:</h2>
           </div>
           <div v-if="selectedProducts.some((p) => p.quantidade > 0)">
             <div v-for="product in selectedProducts" :key="product.id">
               <div v-if="product.quantidade > 0" class="flex justify-between items-center mb-2">
                 <span>{{ product.nome }} ({{ product.quantidade }} x {{ product.preco }}€)</span>
-                <span>{{ ( product.quantidade * product.preco ).toFixed(2) }}€</span>
+                <span>{{ (product.quantidade * product.preco).toFixed(2) }}€</span>
               </div>
             </div>
             <div class="mt-4 font-bold">
@@ -250,12 +258,8 @@ useSeoMeta({
         <!-- Formulário de Finalização da Compra -->
         <div>
           <h2 class="text-2xl font-bold mb-4">Dados do cliente:</h2>
-          <form
-            target="_blank"
-            action="https://formsubmit.co/pracadoslivroslivres@gmail.com"
-            method="POST"
-            class="space-y-4"
-          >
+          <form target="_blank" action="https://formsubmit.co/pracadoslivroslivres@gmail.com" method="POST"
+            class="space-y-4">
             <!-- Campos Ocultos para Formsubmit -->
             <input type="hidden" name="mensagem" value="Novo pedido de compra!">
             <input type="hidden" name="_subject" value="Novo pedido de compra!">
@@ -264,65 +268,30 @@ useSeoMeta({
 
             <!-- Nome e Apelido -->
             <div class="flex flex-col md:flex-row gap-4">
-              <input
-              v-model="nome"
-              type="text"
-              name="nome"
-              class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-              placeholder="Nome"
-              required
-            />
-              <input
-              v-model="apelido"
-              type="text"
-              name="apelido"
-              class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-              placeholder="Apelido"
-              required
-            />
+              <input v-model="nome" type="text" name="nome" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+                placeholder="Nome" required />
+              <input v-model="apelido" type="text" name="apelido"
+                class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Apelido" required />
             </div>
 
             <!-- Morada -->
-            <input
-            v-model="morada"
-            type="text"
-            name="morada"
-            class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-            placeholder="Morada"
-            required
-          />
+            <input v-model="morada" type="text" name="morada" class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
+              placeholder="Morada" required />
 
             <!-- Número de Telemóvel -->
-            <input
-            v-model="mobileNumber"
-            type="text"
-            name="telemovel"
-            class="w-full p-2 border-2 border-[#E9B86C] rounded-lg"
-            placeholder="Número de Telemóvel"
-            pattern="^(9\d{8}|2\d{8})$"
-            title="Telemovel do estilo XXXXXXXXX"
-            required
-          />
+            <input v-model="mobileNumber" type="text" name="telemovel"
+              class="w-full p-2 border-2 border-[#E9B86C] rounded-lg" placeholder="Número de Telemóvel"
+              pattern="^(9\d{8}|2\d{8})$" title="Telemovel do estilo XXXXXXXXX" required />
 
             <!-- Produtos Selecionados (String Estática) -->
-            <input
-            type="hidden"
-            name="produtos"
-            :value="produtosSelecionadosString"
-          />
+            <input type="hidden" name="produtos" :value="produtosSelecionadosString" />
 
             <!-- Total (Campo Estático) -->
-            <input
-            type="hidden"
-            name="total"
-            :value="calculateTotalPrice()"
-          />
+            <input type="hidden" name="total" :value="calculateTotalPrice()" />
             <div class="flex flex-col items-center md:flex-row">
               <!-- Botão -->
-              <button
-                type="submit"
-                class="w-full md:w-max px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]"
-              >
+              <button type="submit"
+                class="w-full md:w-max px-4 py-2 bg-[#E9B86C] font-semibold rounded-lg hover:bg-[#D9A65C]">
                 Realizar pedido!
               </button>
 
@@ -330,20 +299,16 @@ useSeoMeta({
                 <!-- Texto -->
                 <span class="font-light mt-2 md:mt-0 md:ml-3 text-center md:text-left">
                   A Associação vai entrar em contacto assim que possível diretamente para confirmar e tratar do
-                  <span
-                    @click="togglePaymentTypes"
-                    :class="{
-                    'underline cursor-pointer hover:font-normal' : true,
-                    'font-normal' : showPaymentTypes
-                    }">
+                  <span @click="togglePaymentTypes" :class="{
+                    'underline cursor-pointer hover:font-normal': true,
+                    'font-normal': showPaymentTypes
+                  }">
                     pagamento
                   </span>
                 </span>
 
-                <div
-                  v-if="showPaymentTypes"
-                  class="absolute left-1/3 md:left-full bottom-1/3 md:bottom-full mt-1 w-48 p-2 text-xs bg-white border border-gray-200 shadow-md rounded-md text-gray-700 z-50"
-                >
+                <div v-if="showPaymentTypes"
+                  class="absolute left-1/3 md:left-full bottom-1/3 md:bottom-full mt-1 w-48 p-2 text-xs bg-white border border-gray-200 shadow-md rounded-md text-gray-700 z-50">
                   É possível pagar com:
                   <ul class="list-disc ml-4">
                     <li>MBWay</li>
@@ -367,46 +332,58 @@ useSeoMeta({
 <style scoped>
 /* Estilos para o card */
 .aspect-square {
-  aspect-ratio: 1 / 1; /* Garante uma proporção 1:1 */
-  width: 100%; /* Ocupa a largura total da coluna da grid */
+  aspect-ratio: 1 / 1;
+  /* Garante uma proporção 1:1 */
+  width: 100%;
+  /* Ocupa a largura total da coluna da grid */
 }
 
 .product-card {
-  width: 100%; /* Ensure the card takes up the full width of the grid column */
-  height: 100%; /* Ensure the card takes up the full height of the grid row */
+  width: 100%;
+  /* Ensure the card takes up the full width of the grid column */
+  height: 100%;
+  /* Ensure the card takes up the full height of the grid row */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem; /* Add padding to the cards */
+  padding: 1rem;
+  /* Add padding to the cards */
 }
 
 /* Ensure images have the same size */
 .product-card img {
-  width: 100%; /* Ensure the image takes up the full width of the card */
-  height: 150px; /* Set a fixed height for the images */
-  object-fit: cover; /* Ensure the image covers the area without distortion */
+  width: 100%;
+  /* Ensure the image takes up the full width of the card */
+  height: 150px;
+  /* Set a fixed height for the images */
+  object-fit: cover;
+  /* Ensure the image covers the area without distortion */
 }
 
 /* Ensure the product name and price are aligned */
 .product-card h2,
 .product-card p {
-  margin: 0.5rem 0; /* Add some margin for spacing */
+  margin: 0.5rem 0;
+  /* Add some margin for spacing */
 }
 
 /* Ensure the quantity buttons are aligned */
 .quantity-controls {
   display: flex;
-  gap: 0.5rem; /* Add some gap between the buttons */
+  gap: 0.5rem;
+  /* Add some gap between the buttons */
 }
 
 /* Ajustar o tamanho da imagem para caber dentro do quadrado */
 .h-48 {
-  height: 12rem; /* Ajustar conforme necessário */
+  height: 12rem;
+  /* Ajustar conforme necessário */
 }
 
 .w-48 {
-  width: 12rem; /* Ajustar conforme necessário */
+  width: 12rem;
+  /* Ajustar conforme necessário */
 }
 
 /* Posicionar os botões de + e - corretamente */
