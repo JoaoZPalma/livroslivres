@@ -24,7 +24,9 @@ async function carregarProdutos() {
 
 // Inicializar selectedProducts com quantidades padrão (0)
 function initializeSelectedProducts() {
-  // Verificar se há dados salvos no sessionStorage
+  // Only run in browser
+  if (typeof window === 'undefined') return;
+
   const savedSelectedProducts = sessionStorage.getItem("selectedProducts");
   if (savedSelectedProducts) {
     selectedProducts.value = JSON.parse(savedSelectedProducts);
@@ -33,7 +35,7 @@ function initializeSelectedProducts() {
       id: produto.id,
       nome: produto.nome,
       preco: produto.preco,
-      quantidade: 0, // Quantidade padrão
+      quantidade: 0,
       estado: produto.estado,
     }));
   }
@@ -74,7 +76,9 @@ function decrementQuantity(produtoId) {
 
 // Salvar selectedProducts no sessionStorage
 function saveSelectedProducts() {
-  sessionStorage.setItem("selectedProducts", JSON.stringify(selectedProducts.value));
+  if (typeof window !== 'undefined') {
+    sessionStorage.setItem("selectedProducts", JSON.stringify(selectedProducts.value));
+  }
 }
 
 // Calcular o preço total dos produtos selecionados
@@ -88,12 +92,14 @@ function calculateTotalPrice() {
 }
 
 function clearSelectedProducts() {
-  sessionStorage.removeItem("selectedProducts");
+  if (typeof window !== 'undefined') {
+    sessionStorage.removeItem("selectedProducts");
+  }
   selectedProducts.value = produtos.value.map((produto) => ({
     id: produto.id,
     nome: produto.nome,
     preco: produto.preco,
-    quantidade: 0, // Reset quantity to 0
+    quantidade: 0,
     estado: produto.estado,
   }));
 }

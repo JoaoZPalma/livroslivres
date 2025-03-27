@@ -1,17 +1,21 @@
 import './assets/main.css';
 import 'leaflet/dist/leaflet.css';
-
-import { createApp } from 'vue';
-import App from './App.vue';
-import router from './router';
-import './assets/tailwind.css';
 import { createHead } from '@unhead/vue/client';
+import { ViteSSG } from 'vite-ssg';
+import App from './App.vue';
+import { routes } from './router'; // Import your routes
+import './assets/tailwind.css';
 
-const app = createApp(App);
-const head = createHead();
+// ViteSSG setup
+export const createApp = ViteSSG(
+  App,
+  { routes }, // Pass your routes here
+  ({ app, router }) => {
+    const head = createHead();
+    app.use(head); // Use @unhead/vue for head management
 
-app.use(router);
-app.use(head);
-
-// Mount the app
-app.mount('#app');
+    router.options.scrollBehavior = (to, from, savedPosition) => {
+      return { top: 0 };
+    };
+  }
+);
