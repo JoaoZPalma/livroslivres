@@ -1,0 +1,33 @@
+[
+  {
+    "id": 1,
+    "nome": "Danoninho",
+    "preco": 10.99,
+    "descricao": "Um iogurte saboroso e saudável para os meninos e meninas",
+    "imagens": [
+      "/img/danone.jpg",
+      "/img/danone1.jpg"
+    ],
+    "estado": 1
+  },
+  {
+    "id": 2,
+    "nome": "Croquete",
+    "preco": 4.99,
+    "descricao": "Aquela bomba deliciosa",
+    "imagens": [
+      "/img/croquete.jpg"
+    ],
+    "estado": 0
+  },
+  {
+    "id": 3,
+    "nome": "Café",
+    "preco": 0.99,
+    "descricao": "Para começar bem o dia",
+    "imagens": [
+      "/img/cafe.jpg"
+    ],
+    "estado": 1
+  }
+]

@@ -18,13 +18,8 @@ function togglePaymentTypes() {
 
 // Carregar produtos
 async function carregarProdutos() {
-  const arquivos = import.meta.glob('@/produtosData/*.json');
-
-  for (const path in arquivos) {
-    const produto = await arquivos[path]();
-    produtos.value.push(produto);
-  }
-  produtos.value.sort((a, b) => b.id - a.id);
+  const data = await import('@/data/produtos.json');
+  produtos.value = data.default.sort((a, b) => b.id - a.id);
 }
 
 // Inicializar selectedProducts com quantidades padrão (0)
@@ -148,73 +143,49 @@ useSeoMeta({
     <div class="p-6">
       <h1 class="text-center text-4xl md:text-5xl font-bold mb-8">Produtos</h1>
       <div class="text-center text-2xl md:text-3xl font-normal mb-8">Brevemente!!</div>
-      <!-- <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4">
-        <div
-          v-for="produto in produtos"
-          :key="produto.id"
-          class="product-card"
-          :class="{
-            'bg-[#F6EFBD] border-4 rounded border-[#E9B86C]': produto.estado === 1,
-            'bg-[#e5e4dc] border-4 rounded border-[#E9B86C]': produto.estado === 0
-          }"
-        >
-          <router-link
-            :to="'loja/produtos/' + produto.id"
-            class="w-full h-full flex flex-col items-center justify-between"
-          >
-            <div class="relative flex items-center justify-center h-32 w-32 md:h-48 md:w-48 overflow-hidden">
-              <img
-              v-for="(imagem, index) in produto.imagens.slice(0, 1)"
-              :key="index"
-              :src="imagem"
-              alt="Imagem do produto"
-              class="w-full h-48 object-cover rounded"
-            />
-            </div>
-
-            <h2 class="text-xl font-semibold text-center">{{ produto.nome }}</h2>
-            <p class="text-gray-600 md:h-3 text-center">{{ produto.preco }}€</p>
-
-            <p
-              :class="{
-                'text-red-500': produto.estado === 0,
-                'text-green-500': produto.estado === 1
-              }"
-              class="text-sm text-center"
-            >
-              {{ produto.estado === 0 ? 'Fora de stock' : 'Em stock' }}
-            </p>
-          </router-link>
-
-          <div v-if="produto.estado === 1" class="quantity-controls">
-            <button
-              @click="decrementQuantity(produto.id)"
-              @mousedown="startInterval(() => decrementQuantity(produto.id))"
-              @mouseup="stopInterval"
-              @touchstart="startInterval(() => decrementQuantity(produto.id))"
-              @touchend="stopInterval"
-              class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]"
-              :disabled="selectedProducts.find((p) => p.id === produto.id)?.quantidade === 0"
-            >
-              -
-            </button>
-            <span class="flex items-center justify-center">
-              {{ selectedProducts.find((p) => p.id === produto.id)?.quantidade || 0 }}
-            </span>
-            <button
-              @click="incrementQuantity(produto.id)"
-              @mousedown="startInterval(() => incrementQuantity(produto.id))"
-              @mouseup="stopInterval"
-              @touchstart="startInterval(() => incrementQuantity(produto.id))"
-              @touchend="stopInterval"
-              class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]"
-            >
-              +
-            </button>
-          </div>
-        </div>
-      </div>
--->
+      <!-- <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-6 gap-4"> -->
+      <!--   <div v-for="produto in produtos" :key="produto.id" class="product-card" :class="{ -->
+      <!--       'bg-[#F6EFBD] border-4 rounded border-[#E9B86C]': produto.estado === 1, -->
+      <!--       'bg-[#e5e4dc] border-4 rounded border-[#E9B86C]': produto.estado === 0 -->
+      <!--     }"> -->
+      <!--     <router-link :to="'loja/produtos/' + produto.id" -->
+      <!--       class="w-full h-full flex flex-col items-center justify-between"> -->
+      <!--       <div class="relative flex items-center justify-center h-32 w-32 md:h-48 md:w-48 overflow-hidden"> -->
+      <!--         <img v-for="(imagem, index) in produto.imagens.slice(0, 1)" :key="index" :src="imagem" -->
+      <!--           alt="Imagem do produto" class="w-full h-48 object-cover rounded" /> -->
+      <!--       </div> -->
+      <!---->
+      <!--       <h2 class="text-xl font-semibold text-center">{{ produto.nome }}</h2> -->
+      <!--       <p class="text-gray-600 md:h-3 text-center">{{ produto.preco }}€</p> -->
+      <!---->
+      <!--       <p :class="{ -->
+      <!--           'text-red-500': produto.estado === 0, -->
+      <!--           'text-green-500': produto.estado === 1 -->
+      <!--         }" class="text-sm text-center"> -->
+      <!--         {{ produto.estado === 0 ? 'Fora de stock' : 'Em stock' }} -->
+      <!--       </p> -->
+      <!--     </router-link> -->
+      <!---->
+      <!--     <div v-if="produto.estado === 1" class="quantity-controls"> -->
+      <!--       <button @click="decrementQuantity(produto.id)" -->
+      <!--         @mousedown="startInterval(() => decrementQuantity(produto.id))" @mouseup="stopInterval" -->
+      <!--         @touchstart="startInterval(() => decrementQuantity(produto.id))" @touchend="stopInterval" -->
+      <!--         class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]" -->
+      <!--         :disabled="selectedProducts.find((p) => p.id === produto.id)?.quantidade === 0"> -->
+      <!--         - -->
+      <!--       </button> -->
+      <!--       <span class="flex items-center justify-center"> -->
+      <!--         {{selectedProducts.find((p) => p.id === produto.id)?.quantidade || 0 }} -->
+      <!--       </span> -->
+      <!--       <button @click="incrementQuantity(produto.id)" -->
+      <!--         @mousedown="startInterval(() => incrementQuantity(produto.id))" @mouseup="stopInterval" -->
+      <!--         @touchstart="startInterval(() => incrementQuantity(produto.id))" @touchend="stopInterval" -->
+      <!--         class="px-2 py-1 bg-[#E9B86C] rounded hover:bg-[#D9A65C]"> -->
+      <!--         + -->
+      <!--       </button> -->
+      <!--     </div> -->
+      <!--   </div> -->
+      <!-- </div> -->
     </div>
 
     <!-- Card para Carrinho e Formulário -->

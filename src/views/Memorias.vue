@@ -7,13 +7,8 @@ const memorias = ref([]);
 
 // Carregar os ficheiros JSON dinamicamente
 async function carregarMemorias() {
-  const arquivos = import.meta.glob('@/memoriasData/*.json');
-
-  for (const path in arquivos) {
-    const memoria = await arquivos[path]();
-    memorias.value.push(memoria);
-  }
-  memorias.value.sort((a, b) => b.id - a.id)
+  const data = await import('@/data/memorias.json');
+  memorias.value = data.default.sort((a, b) => b.id - a.id);
 }
 
 // Carregar as memórias ao montar o componente
