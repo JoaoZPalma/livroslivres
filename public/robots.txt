@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+Disallow: /tmp/
+Disallow: /*.json$
+Crawl-delay: 3
+
+Sitemap: https://www.pracadoslivroslivres.org/sitemap.xml
