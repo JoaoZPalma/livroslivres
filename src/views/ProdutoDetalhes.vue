@@ -14,8 +14,8 @@ const produto = ref(null);
 
 async function carregarProduto() {
   try {
-    const produtoData = await import(`@/produtosData/produto${route.params.id}.json`);
-    produto.value = produtoData;
+    const produtosData = await import("@/data/produtos.json");
+    produto.value = produtosData.default.find(p => p.id === Number(route.params.id));
   } catch (error) {
     console.error("Produto não encontrado!", error);
   }
@@ -31,29 +31,18 @@ onMounted(carregarProduto);
 <template>
   <div>
     <div class="mx-2 md:mx-8 border-8 border-[#E9B86C] text-[#2E2E2E] space-y-6 flex flex-col">
-      <div v-if="produto" :class="
-        {'custom-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 1,
-        'custom-nostock-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 0}">
+      <div v-if="produto" :class="{
+        'custom-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 1,
+        'custom-nostock-bg p-6 flex flex-col md:flex-row md:space-x-8': produto.estado === 0
+      }">
         <!-- Carrossel de Imagens (à direita no PC) -->
         <div class="md:w-1/2">
-          <Swiper
-            :modules="[Navigation, Pagination]"
-            :spaceBetween="10"
-            :slidesPerView="1"
-            :navigation="true"
-            :pagination="true"
-            class="mt-2 w-full max-w-[70vh] mx-auto"
-          >
-            <SwiperSlide
-              v-for="(imagem, index) in produto.imagens"
-              :key="index"
-              class="flex items-center justify-center"
-            >
-              <img
-                :src="imagem"
-                alt="Imagem do produto"
-                class="w-full h-auto max-h-[70vh] object-contain rounded z-30"
-              />
+          <Swiper :modules="[Navigation, Pagination]" :spaceBetween="10" :slidesPerView="1" :navigation="true"
+            :pagination="true" class="mt-2 w-full max-w-[70vh] mx-auto">
+            <SwiperSlide v-for="(imagem, index) in produto.imagens" :key="index"
+              class="flex items-center justify-center">
+              <img :src="imagem" alt="Imagem do produto"
+                class="w-full h-auto max-h-[70vh] object-contain rounded z-30" />
             </SwiperSlide>
           </Swiper>
         </div>
@@ -66,8 +55,7 @@ onMounted(carregarProduto);
 
           <!-- Botão "Voltar" -->
           <div class="mt-4">
-            <CustomButton @click="goBack" class='w-full md:w-max md:h-max mt-4'
-            >
+            <CustomButton @click="goBack" class='w-full md:w-max md:h-max mt-4'>
               Voltar
             </CustomButton>
           </div>
@@ -83,11 +71,16 @@ onMounted(carregarProduto);
 /* Estilizando as setas do Swiper */
 .swiper-button-prev,
 .swiper-button-next {
-  color: #2e2e2e; /* Cor das setas */
-  background-color: rgba(246, 239, 189, 0.8); /* Fundo semi-transparente */
-  border-radius: 50%; /* Botões redondos */
-  width: 40px; /* Tamanho dos botões */
-  height: 40px; /* Tamanho dos botões */
+  color: #2e2e2e;
+  /* Cor das setas */
+  background-color: rgba(246, 239, 189, 0.8);
+  /* Fundo semi-transparente */
+  border-radius: 50%;
+  /* Botões redondos */
+  width: 40px;
+  /* Tamanho dos botões */
+  height: 40px;
+  /* Tamanho dos botões */
   display: flex;
   align-items: center;
   justify-content: center;
@@ -96,26 +89,31 @@ onMounted(carregarProduto);
 /* Efeito ao passar o mouse */
 .swiper-button-prev:hover,
 .swiper-button-next:hover {
-  background-color: rgba(233, 184, 108, 0.8); /* Cor de fundo no hover */
+  background-color: rgba(233, 184, 108, 0.8);
+  /* Cor de fundo no hover */
 }
 
 /* Estilo da paginação */
 .swiper-pagination-bullet {
-  background-color: #F6EFBD; /* Cor das bolinhas da paginação */
+  background-color: #F6EFBD;
+  /* Cor das bolinhas da paginação */
   opacity: 0.5;
   border: 2px solid #2e2e2e;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #E9B86C; /* Cor da bolinha ativa */
+  background-color: #E9B86C;
+  /* Cor da bolinha ativa */
   opacity: 1;
 }
 
 .custom-bg {
-  background-color: #F6EFBD !important; /* Fundo do container */
+  background-color: #F6EFBD !important;
+  /* Fundo do container */
 }
 
 .custom-nostock-bg {
-  background-color: #e5e4dc !important; /* Fundo do container */
+  background-color: #e5e4dc !important;
+  /* Fundo do container */
 }
 </style>
